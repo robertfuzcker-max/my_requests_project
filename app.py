@@ -29,7 +29,7 @@ def main():
         if choice == "1":
             print_movies(movies)
         elif choice == "2":
-            title = input("Название фильма: ").strip()
+            title = input("Название фильм: ").strip()
             year = int(input("Год выпуска: "))
             movies = add_movie(movies, title, year)
             save_movies(DATA_FILE, movies)
