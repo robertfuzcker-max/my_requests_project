@@ -36,7 +36,7 @@ def main():
             print("Фильм добавлен!")
         elif choice == "3":
             print_movies(movies)
-            movie_id = int(input("ID фильма: "))
+            movie_id = int(input("ID фильа: "))
             movies = mark_watched(movies, movie_id)
             save_movies(DATA_FILE, movies)
             print("Статус обновлён!")
