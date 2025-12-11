@@ -1,7 +1,8 @@
-import pytest
 import os
-import json
-from logic import load_movies, save_movies, add_movie, mark_watched, find_by_year
+
+import pytest
+
+from logic import load_movies, save_movies, add_movie, mark_watched, find_by_year, delete_movie
 
 
 @pytest.fixture
@@ -32,21 +33,23 @@ def test_mark_watched():
     updated = mark_watched(movies, 1)
     assert updated[0]["watched"] == True
 
-    not_found = mark_watched(movies, 999)
+    movies2 = [{"id": 1, "title": "Test", "year": 2020, "watched": False}]
+    not_found = mark_watched(movies2, 999)
     assert len(not_found) == 1
     assert not_found[0]["watched"] == False
 
-def test_delete_movie():
-        movies = [
-            {"id": 1, "title": "Movie1", "year": 2020, "watched": False},
-            {"id": 2, "title": "Movie2", "year": 2021, "watched": True}
-        ]
-        updated = delete_movie(movies, 1)
-        assert len(updated) == 1
-        assert updated[0]["id"] == 2
 
-        not_found = delete_movie(movies, 999)
-        assert len(not_found) == 2  # список не изменился
+def test_delete_movie():
+    movies = [
+        {"id": 1, "title": "Movie1", "year": 2020, "watched": False},
+        {"id": 2, "title": "Movie2", "year": 2021, "watched": True}
+    ]
+    updated = delete_movie(movies, 1)
+    assert len(updated) == 1
+    assert updated[0]["id"] == 2
+
+    not_found = delete_movie(movies, 999)
+    assert len(not_found) == 2  # список не изменился
 
 
 def test_find_by_year():
